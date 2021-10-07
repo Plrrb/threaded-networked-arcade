@@ -25,8 +25,8 @@ class Player(arcade.Sprite):
 
 
 class MyGame(arcade.Window):
-    def __init__(self, width, height, title):
-        super().__init__(width, height, title, client_socket)
+    def __init__(self, width, height, title, client_socket):
+        super().__init__(width, height, title)
         self.client_socket = client_socket
         self.player2 = None
         self.player1 = None
