@@ -1,6 +1,7 @@
 import arcade
 import socket
 import threading
+import time
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
@@ -42,22 +43,25 @@ class MyGame(arcade.Window):
         self.player2.draw()
 
     def recv_move(self):
-        player_pos = self.client_socket.recv(1024)
-        player_pos = player_pos.decode("ascii")
+        while True:
+            time.sleep(1 / 60)
+            player_pos = self.client_socket.recv(1024)
+            player_pos = player_pos.decode("ascii")
 
-        print(player_pos)
+            print(player_pos)
 
-        player_pos = eval(player_pos)
-        print(player_pos)
+            player_pos = eval(player_pos)
+            print(player_pos)
 
-        self.player2.center_x, self.player2.center_y = player_pos
+            self.player2.center_x, self.player2.center_y = player_pos
 
     def on_update(self, delta_time: float):
-
         self.player1.update()
+        self.player2.update()
+
+        print(self.num)
 
         data = f"({self.player1.center_x}, {self.player1.center_y})".encode("ascii")
-        print(data)
         self.client_socket.send(data)
 
     def on_key_press(self, key, key_modifiers):
