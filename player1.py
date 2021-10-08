@@ -59,8 +59,6 @@ class MyGame(arcade.Window):
         self.player1.update()
         self.player2.update()
 
-        print(self.num)
-
         data = f"({self.player1.center_x}, {self.player1.center_y})".encode("ascii")
         self.client_socket.send(data)
 
