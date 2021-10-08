@@ -43,7 +43,7 @@ class MyGame(arcade.Window):
 
     def recv_move(self):
         player_pos = self.client_socket.recv(1024)
-        player_pos.decode("ascii")
+        player_pos = player_pos.decode("ascii")
 
         player_pos = eval(player_pos)
         print(player_pos)
