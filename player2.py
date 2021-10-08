@@ -59,8 +59,6 @@ class MyGame(arcade.Window):
         self.player2.update()
         self.player1.update()
 
-        print(self.num)
-
         data = f"({self.player2.center_x}, {self.player2.center_y})".encode("ascii")
         self.client_socket.send(data)
 
@@ -85,7 +83,7 @@ def main():
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     # connection to hostname on the port.
-    client_socket.connect(("162.196.90.150", 5555))
+    client_socket.connect(("10.0.0.99", 5555))
 
     game = MyGame(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE, client_socket)
 
