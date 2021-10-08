@@ -1,7 +1,6 @@
 import arcade
 import socket
 import threading
-import time
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
@@ -81,11 +80,11 @@ def main():
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     # connection to hostname on the port.
-    client_socket.connect(("10.0.0.99", 5555))
+    client_socket.connect(("10.0.0.100", 5555))
 
     game = MyGame(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE, client_socket)
 
-    recv_thread = threading.Thread(target=game.recv_move)
+    recv_thread = threading.Thread(target=game.recv_move, daemon=True)
 
     game.setup()
     recv_thread.start()

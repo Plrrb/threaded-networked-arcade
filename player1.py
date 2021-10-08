@@ -1,7 +1,6 @@
 import arcade
 import socket
 import threading
-import time
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
