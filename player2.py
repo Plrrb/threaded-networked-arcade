@@ -32,8 +32,8 @@ class MyGame(arcade.Window):
         self.player1 = None
 
     def setup(self):
-        self.player2 = Player(":resources:images/topdown_tanks/tank_red.png")
         self.player1 = Player(":resources:images/topdown_tanks/tank_blue.png")
+        self.player2 = Player(":resources:images/topdown_tanks/tank_red.png")
 
     def on_draw(self):
         arcade.start_render()
@@ -44,6 +44,8 @@ class MyGame(arcade.Window):
     def recv_move(self):
         player_pos = self.client_socket.recv(1024)
         player_pos = player_pos.decode("ascii")
+
+        print(player_pos)
 
         player_pos = eval(player_pos)
         print(player_pos)

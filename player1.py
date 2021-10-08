@@ -45,6 +45,8 @@ class MyGame(arcade.Window):
         player_pos = self.client_socket.recv(1024)
         player_pos = player_pos.decode("ascii")
 
+        print(player_pos)
+
         player_pos = eval(player_pos)
         print(player_pos)
 
@@ -55,6 +57,7 @@ class MyGame(arcade.Window):
         self.player1.update()
 
         data = f"({self.player1.center_x}, {self.player1.center_y})".encode("ascii")
+
         self.client_socket.send(data)
 
     def on_key_press(self, key, key_modifiers):
