@@ -44,7 +44,11 @@ class MyGame(arcade.Window):
 
     def recv_move(self):
         while True:
+            data = f"({self.player1.center_x}, {self.player1.center_y})".encode("ascii")
+            self.client_socket.send(data)
+
             time.sleep(1 / 60)
+
             player_pos = self.client_socket.recv(1024)
             player_pos = player_pos.decode("ascii")
 
@@ -54,9 +58,6 @@ class MyGame(arcade.Window):
             print(player_pos)
 
             self.player2.center_x, self.player2.center_y = player_pos
-
-            data = f"({self.player1.center_x}, {self.player1.center_y})".encode("ascii")
-            self.client_socket.send(data)
 
     def on_update(self, delta_time: float):
         self.player1.update()
