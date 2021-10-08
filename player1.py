@@ -53,10 +53,7 @@ class MyGame(arcade.Window):
             player_pos = self.client_socket.recv(1024)
             player_pos = player_pos.decode("ascii")
 
-            print(player_pos)
-
             player_pos = eval(player_pos)
-            print(player_pos)
 
             self.player2.center_x, self.player2.center_y = player_pos
             self.send_our_pos()
