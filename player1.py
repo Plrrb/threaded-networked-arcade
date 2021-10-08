@@ -35,6 +35,7 @@ class MyGame(arcade.Window):
     def setup(self):
         self.player1 = Player(":resources:images/topdown_tanks/tank_blue.png")
         self.player2 = Player(":resources:images/topdown_tanks/tank_red.png")
+        self.send_our_pos()
 
     def on_draw(self):
         arcade.start_render()
@@ -58,11 +59,11 @@ class MyGame(arcade.Window):
             print(player_pos)
 
             self.player2.center_x, self.player2.center_y = player_pos
+            self.send_our_pos()
 
     def on_update(self, delta_time: float):
         self.player1.update()
         self.player2.update()
-        self.send_our_pos()
 
     def on_key_press(self, key, key_modifiers):
         if key == arcade.key.W:

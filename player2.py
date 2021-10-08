@@ -48,7 +48,6 @@ class MyGame(arcade.Window):
 
     def recv_move(self):
         while True:
-
             player_pos = self.client_socket.recv(1024)
             player_pos = player_pos.decode("ascii")
 
@@ -58,12 +57,11 @@ class MyGame(arcade.Window):
             print(player_pos)
 
             self.player1.center_x, self.player1.center_y = player_pos
+            self.send_our_pos()
 
     def on_update(self, delta_time: float):
         self.player2.update()
         self.player1.update()
-
-        self.send_our_pos()
 
     def on_key_press(self, key, key_modifiers):
         if key == arcade.key.W:
