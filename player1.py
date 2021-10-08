@@ -46,6 +46,7 @@ class MyGame(arcade.Window):
         player_pos.decode("ascii")
 
         player_pos = eval(player_pos)
+        print(player_pos)
 
         self.player2.center_x, self.player2.center_y = player_pos
 
