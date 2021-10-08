@@ -42,12 +42,12 @@ class MyGame(arcade.Window):
         self.player1.draw()
         self.player2.draw()
 
+    def send_our_pos(self):
+        data = f"({self.player1.center_x}, {self.player1.center_y})".encode("ascii")
+        self.client_socket.send(data)
+
     def recv_move(self):
         while True:
-            data = f"({self.player1.center_x}, {self.player1.center_y})".encode("ascii")
-            self.client_socket.send(data)
-
-            time.sleep(1 / 60)
 
             player_pos = self.client_socket.recv(1024)
             player_pos = player_pos.decode("ascii")
@@ -62,6 +62,7 @@ class MyGame(arcade.Window):
     def on_update(self, delta_time: float):
         self.player1.update()
         self.player2.update()
+        self.send_our_pos()
 
     def on_key_press(self, key, key_modifiers):
         if key == arcade.key.W:
