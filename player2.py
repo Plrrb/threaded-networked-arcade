@@ -61,6 +61,7 @@ class MyGame(arcade.Window):
 
         data = f"({self.player2.center_x}, {self.player2.center_y})".encode("ascii")
         self.client_socket.send(data)
+        time.sleep(1 / 60)
 
     def on_key_press(self, key, key_modifiers):
         if key == arcade.key.W:
