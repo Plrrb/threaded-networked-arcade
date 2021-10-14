@@ -24,8 +24,8 @@ def main():
 
     recv_thread = threading.Thread(target=game.recv_move, daemon=True)
 
-    game.send_our_pos()
     game.setup()
+    game.send_our_pos()
     recv_thread.start()
     arcade.run()
 
