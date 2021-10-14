@@ -74,7 +74,7 @@ class MyGame(arcade.Window):
 
     def on_key_release(self, key, key_modifiers):
         if key == arcade.key.W or key == arcade.key.S:
-            self.player2.stop_y()
+            self.player1.stop_y()
 
         if key == arcade.key.A or key == arcade.key.D:
-            self.player2.stop_x()
+            self.player1.stop_x()
