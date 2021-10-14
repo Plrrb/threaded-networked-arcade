@@ -4,7 +4,7 @@ import threading
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
-SCREEN_TITLE = "threaded arcade"
+SCREEN_TITLE = "threaded arcade player 2"
 
 
 class Player(arcade.Sprite):
@@ -12,16 +12,22 @@ class Player(arcade.Sprite):
         super().__init__(image)
 
     def up(self):
-        self.change_y += 1
+        self.change_y = 1
 
     def down(self):
-        self.change_y -= 1
+        self.change_y = -1
 
     def left(self):
-        self.change_x -= 1
+        self.change_x = -1
 
     def right(self):
-        self.change_x += 1
+        self.change_x = 1
+
+    def stop_x(self):
+        self.change_x = 0
+
+    def stop_y(self):
+        self.change_y = 0
 
 
 class MyGame(arcade.Window):
@@ -80,7 +86,7 @@ def main():
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     # connection to hostname on the port.
-    client_socket.connect(("10.0.0.100", 5555))
+    client_socket.connect(("162.196.90.150", 5555))
 
     game = MyGame(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE, client_socket)
 

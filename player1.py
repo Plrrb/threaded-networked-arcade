@@ -4,7 +4,7 @@ import threading
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
-SCREEN_TITLE = "threaded arcade"
+SCREEN_TITLE = "threaded arcade player 1"
 
 
 class Player(arcade.Sprite):
@@ -12,16 +12,22 @@ class Player(arcade.Sprite):
         super().__init__(image)
 
     def up(self):
-        self.change_y += 1
+        self.change_y = 1
 
     def down(self):
-        self.change_y -= 1
+        self.change_y = -1
 
     def left(self):
-        self.change_x -= 1
+        self.change_x = -1
 
     def right(self):
-        self.change_x += 1
+        self.change_x = 1
+
+    def stop_x(self):
+        self.change_x = 0
+
+    def stop_y(self):
+        self.change_y = 0
 
 
 class MyGame(arcade.Window):
@@ -48,7 +54,6 @@ class MyGame(arcade.Window):
 
     def recv_move(self):
         while True:
-
             player_pos = self.client_socket.recv(1024)
             player_pos = player_pos.decode("ascii")
 
