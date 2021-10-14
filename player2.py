@@ -18,7 +18,7 @@ def main():
     # connection to hostname on the port.
     client_socket.connect(("162.196.90.150", 5555))
 
-    game = MyGame(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE, client_socket)
+    game = MyGame(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE, client_socket, False)
 
     recv_thread = threading.Thread(target=game.recv_move, daemon=True)
 

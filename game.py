@@ -25,15 +25,22 @@ class Player(arcade.Sprite):
 
 
 class MyGame(arcade.Window):
-    def __init__(self, width, height, title, client_socket):
+    def __init__(self, width, height, title, client_socket, is_server):
         super().__init__(width, height, title)
         self.client_socket = client_socket
         self.player1 = None
         self.player2 = None
+        self.is_server = is_server
 
     def setup(self):
-        self.player1 = Player(":resources:images/topdown_tanks/tank_blue.png")
-        self.player2 = arcade.Sprite(":resources:images/topdown_tanks/tank_red.png")
+        if self.is_server:
+            self.player1 = Player(":resources:images/topdown_tanks/tank_blue.png")
+            self.player2 = arcade.Sprite(":resources:images/topdown_tanks/tank_red.png")
+        else:
+            self.player1 = Player(":resources:images/topdown_tanks/tank_red.png")
+            self.player2 = arcade.Sprite(
+                ":resources:images/topdown_tanks/tank_blue.png"
+            )
 
     def on_draw(self):
         arcade.start_render()

@@ -20,7 +20,7 @@ def main():
     client_socket, addr = server_socket.accept()
     print("client connected from", addr)
 
-    game = MyGame(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE, client_socket)
+    game = MyGame(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE, client_socket, True)
 
     recv_thread = threading.Thread(target=game.recv_move, daemon=True)
 
