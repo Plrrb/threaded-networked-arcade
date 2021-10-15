@@ -1,8 +1,7 @@
+from game import MyGame
 import arcade
 import socket
 import threading
-
-from game import MyGame
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
@@ -16,9 +15,9 @@ def main():
     server_socket.bind((socket.gethostname(), 5555))
     server_socket.listen(1)
 
-    print("waiting for client connection")
+    print("Waiting for client connection...")
     client_socket, addr = server_socket.accept()
-    print("client connected from", addr)
+    print("Client connected from", addr)
 
     game = MyGame(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE, client_socket, True)
 

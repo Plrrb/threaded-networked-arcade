@@ -1,8 +1,9 @@
+from game import MyGame
 import arcade
 import socket
+import sys
 import threading
 
-from game import MyGame
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
@@ -16,7 +17,11 @@ def main():
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     # connection to hostname on the port.
-    client_socket.connect(("162.196.90.150", 5555))
+    player2_ip = sys.argv[1]
+
+    print("Trying to connect...")
+    client_socket.connect((player2_ip, 5555))
+    print("Connected!")
 
     game = MyGame(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE, client_socket, False)
 
