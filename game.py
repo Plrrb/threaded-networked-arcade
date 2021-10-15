@@ -1,4 +1,5 @@
 import arcade
+import threading
 
 
 class Player(arcade.Sprite):
@@ -25,28 +26,27 @@ class Player(arcade.Sprite):
 
 
 class MyGame(arcade.Window):
-    def __init__(self, width, height, title, client_socket, is_server):
+    def __init__(
+        self, width, height, title, client_socket, player1_image, player2_image
+    ):
         super().__init__(width, height, title)
         self.client_socket = client_socket
-        self.player1 = None
-        self.player2 = None
-        self.is_server = is_server
+        self.player1 = player1_image
+        self.player2 = player2_image
 
     def setup(self):
-        if self.is_server:
-            self.player1 = Player(":resources:images/topdown_tanks/tank_blue.png")
-            self.player2 = arcade.Sprite(":resources:images/topdown_tanks/tank_red.png")
-        else:
-            self.player1 = Player(":resources:images/topdown_tanks/tank_red.png")
-            self.player2 = arcade.Sprite(
-                ":resources:images/topdown_tanks/tank_blue.png"
-            )
+
+        self.player1 = Player(self.player1)
+        self.player2 = arcade.Sprite(self.player2)
+
+        recv_thread = threading.Thread(target=self.recv_move, daemon=True)
+        recv_thread.start()
 
     def on_draw(self):
         arcade.start_render()
 
-        self.player1.draw()
         self.player2.draw()
+        self.player1.draw()
 
     def send_our_pos(self):
         data = f"({self.player1.center_x}, {self.player1.center_y})".encode("ascii")
