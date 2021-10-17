@@ -35,7 +35,6 @@ class MyGame(arcade.Window):
         self.player2 = player2_image
 
     def setup(self):
-
         self.player1 = Player(self.player1)
         self.player2 = arcade.Sprite(self.player2)
 
@@ -53,8 +52,8 @@ class MyGame(arcade.Window):
         self.client_socket.send(data)
 
     def recv_move(self):
-        while True:
-            try:
+        try:
+            while True:
                 player_pos = self.client_socket.recv(1024)
                 player_pos = player_pos.decode("ascii")
 
@@ -62,11 +61,12 @@ class MyGame(arcade.Window):
 
                 self.player2.center_x, self.player2.center_y = player_pos
                 self.send_our_pos()
-            except:
-                print("Other Player has left", "Exiting...")
-                self.client_socket.close()
-                arcade.exit()
-                return
+        except:
+            print("Other Player has left")
+            print("Exiting...")
+            self.client_socket.close()
+            arcade.exit()
+            return
 
     def on_update(self, delta_time: float):
         self.player1.update()
