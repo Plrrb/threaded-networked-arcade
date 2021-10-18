@@ -61,7 +61,7 @@ class MyGame(arcade.Window):
 
                 self.player2.center_x, self.player2.center_y = player_pos
                 self.send_our_pos()
-        except:
+        except ConnectionResetError:
             print("Other Player has left")
             print("Exiting...")
             self.client_socket.close()
