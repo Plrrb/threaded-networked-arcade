@@ -51,6 +51,11 @@ class MyGame(arcade.Window):
         data = f"({self.player1.center_x}, {self.player1.center_y})".encode("ascii")
         self.client_socket.send(data)
 
+    def leave(self):
+        print("Exiting...")
+        self.client_socket.close()
+        arcade.exit()
+
     def recv_move(self):
         try:
             while True:
@@ -63,9 +68,7 @@ class MyGame(arcade.Window):
                 self.send_our_pos()
         except ConnectionResetError:
             print("Other Player has left")
-            print("Exiting...")
-            self.client_socket.close()
-            arcade.exit()
+            self.leave()
             return
 
     def on_update(self, delta_time: float):

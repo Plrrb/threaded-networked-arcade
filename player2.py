@@ -27,6 +27,7 @@ def main():
     )
     game.setup()
     arcade.run()
+    game.leave()
 
 
 if __name__ == "__main__":
